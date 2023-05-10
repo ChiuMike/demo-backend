@@ -1,5 +1,6 @@
 package com.example.demobackend.jwt.filter;
 
+import com.example.demobackend.auth.util.AuthUtils;
 import com.example.demobackend.jwt.config.JwtConfig;
 import com.example.demobackend.jwt.service.AuthUserDetailsService;
 import com.example.demobackend.jwt.service.JwtService;
@@ -32,6 +33,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private final AuthUserDetailsService authUserDetailsService;
 
+    @Autowired
+    private AuthUtils authUtils;
+
     @Override
     protected void doFilterInternal(
             @NotNull HttpServletRequest request,
@@ -52,7 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         token = authHeader.replace(scheme, "");
 
-        username = jwtService.extractUsername(token);
+        username = authUtils.convertUsernameCase(jwtService.extractUsername(token));
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 

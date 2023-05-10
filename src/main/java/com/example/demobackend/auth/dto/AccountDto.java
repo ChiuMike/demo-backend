@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class AccountDto implements Serializable {
 
     @Size(min = 1, max = 50)
-    private String username;
+    private String account;
 
     @Size(min = 1, max = 50)
     private String password;

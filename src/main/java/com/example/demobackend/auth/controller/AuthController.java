@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,13 +32,13 @@ public class AuthController {
     private JwtConfig jwtConfig;
 
     @PostMapping("/signin")
-    public Result<LoginDetailDto> signIn(@RequestBody AccountDto accountDto) throws AuthenticationException {
+    public Result<LoginDetailDto> signIn(@Validated @RequestBody AccountDto accountDto) throws AuthenticationException {
 
-        accountDto.setUsername(accountDto.getUsername());
+        accountDto.setAccount(accountDto.getAccount());
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        accountDto.getUsername(),
+                        accountDto.getAccount(),
                         accountDto.getPassword()
                 )
         );

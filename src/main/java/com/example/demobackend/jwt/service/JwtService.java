@@ -86,24 +86,6 @@ public class JwtService {
                 .compact();
     }
 
-//    private String createAccessToken(
-//            @NonNull String subject,
-//            @NonNull String userUuid,
-//            @NonNull Date issuedAt,
-//            @NonNull Date expiration,
-//            Map<String, Object> extraClaim,
-//            UserDetails userDetails
-//    ) {
-//        return Jwts.builder()
-//                .setClaims(extraClaim)
-//                .setSubject(subject)
-//                .claim("UUID", userUuid)
-//                .setIssuedAt(issuedAt)
-//                .setExpiration(expiration)
-//                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-//                .compact();
-//    }
-
     private String createAccessToken(
             @NonNull String subject,
             @NonNull String userUuid,

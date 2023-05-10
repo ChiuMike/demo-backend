@@ -21,7 +21,7 @@ public class AuthUserDetailsService implements UserDetailsService {
     @Override
     public AuthUserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
 
-        final Optional<UserEntity> userEntityOptional = userRepository.findByUsername(account);
+        final Optional<UserEntity> userEntityOptional = userRepository.findByUsernameOrEmail(account, account);
 
         if (userEntityOptional.isEmpty()) {
             // report status code 500
